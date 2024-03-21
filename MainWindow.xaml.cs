@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,101 +11,78 @@ namespace TimeVersion
 {
     public partial class MainWindow : Window
     {
+        private const string ApiKey = "";
+        private readonly HttpClient _httpClient;
 
-        Color corVerdeSucesso = Color.FromRgb(22, 120, 48); //Verde 
-        Color corVermelhoAviso = Color.FromRgb(145, 10, 10); //Vermelho
-
-        public MainWindow() => InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+            _httpClient = new HttpClient();
+        }
 
         private async void BuscarPrevisaoClick(object sender, RoutedEventArgs evento)
         {
-            string campo = txtCidade.Text.Trim();
+            string cidade = txtCidade.Text.Trim();
+
             try
             {
-                string cidade = campo;
                 string previsao = await ObterPrevisaoDoTempo(cidade);
-                string previsao2 = await ObterDescricaoDoCeu(cidade);
-                labelResultado.Text = $"{previsao}";
-                labelTitulo.Text = $"{previsao2}";
+                string previsaoDescricao = await ObterDescricaoDoCeu(cidade);
 
-                ((Button)sender).Content = "Concluido";
+                labelResultado.Text = previsao;
+                labelTitulo.Text = previsaoDescricao;
 
-                Brush verdeClaro = new SolidColorBrush(corVerdeSucesso);
-                ((Button)sender).Background = verdeClaro;
-                ((Button)sender).Foreground = Brushes.Wheat;
+                AtualizarBotaoConcluido((Button)sender, true);
             }
-            catch (Exception erro)
+            catch (HttpRequestException ex)
             {
-                Brush VermelhoClaro = new SolidColorBrush(corVermelhoAviso);
-                ((Button)sender).Background = VermelhoClaro;
-                ((Button)sender).Foreground = Brushes.Wheat;
-                ((Button)sender).Content = erro.Message.Contains("Not Found") ? "Cidade Inexistente" : (object)"Campo Vazio";
+                string mensagemErro = ex.Message.Contains("Not Found") ? "Cidade Inexistente" : "Campo Vazio";
+                AtualizarBotaoConcluido((Button)sender, false, mensagemErro);
             }
         }
 
         private async Task<string> ObterPrevisaoDoTempo(string cidade)
         {
-            string apiUrl = $"http://api.openweathermap.org/data/2.5/weather?q={cidade}&appid={apiKey}&units=metric&lang=pt";
-            using (HttpClient chamada = new HttpClient())
-            {
-                HttpResponseMessage ResultChamada = await chamada.GetAsync(apiUrl);
+            string apiUrl = $"http://api.openweathermap.org/data/2.5/weather?q={cidade}&appid={ApiKey}&units=metric&lang=pt";
+            HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
-                if (ResultChamada.IsSuccessStatusCode)
-                {
-                    string json = await ResultChamada.Content.ReadAsStringAsync();
-                    Root cidadeEscolhida = JsonSerializer.Deserialize<Root>(json);
+            response.EnsureSuccessStatusCode();
 
-                    double tempCelcius = cidadeEscolhida.Main.Temp;
-                    double veloKM = cidadeEscolhida.Wind.Speed;
-                    double tempSensacao = cidadeEscolhida.Main.FeelsLike;
-                    double tempMax = cidadeEscolhida.Main.TempMax;
-                    double tempMin = cidadeEscolhida.Main.TempMin;
-                    int umidade = cidadeEscolhida.Main.Humidity;
-                    string nome = cidadeEscolhida.Name.ToString();
-                    string OlhaCeu = cidadeEscolhida.Weather[0].Description.ToUpperInvariant();
+            string json = await response.Content.ReadAsStringAsync();
+            Root cidadeEscolhida = JsonSerializer.Deserialize<Root>(json);
 
-                    return MostraNaTela(cidadeEscolhida, veloKM, umidade);
-                }
-                else throw new Exception($"Nao encontrado: {ResultChamada.ReasonPhrase}");
-                
-            }
+            double velocidadeVento = cidadeEscolhida.Wind.Speed;
+            int umidade = cidadeEscolhida.Main.Humidity;
+
+            return $"Temperatura: {cidadeEscolhida.Main.Temp}°C\nSensação: {cidadeEscolhida.Main.FeelsLike}°C\nVento: {velocidadeVento} Km/h\nUmidade: {umidade}%";
         }
 
         private async Task<string> ObterDescricaoDoCeu(string cidade)
         {
-            string apiUrl = $"http://api.openweathermap.org/data/2.5/weather?q={cidade}&appid={apiKey}&units=metric&lang=pt";
+            string apiUrl = $"http://api.openweathermap.org/data/2.5/weather?q={cidade}&appid={ApiKey}&units=metric&lang=pt";
+            HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
-            using (HttpClient chamada = new HttpClient())
-            {
-                HttpResponseMessage ResultChamada = await chamada.GetAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
 
-                if (ResultChamada.IsSuccessStatusCode)
-                {
-                    string json = await ResultChamada.Content.ReadAsStringAsync();
-                    Root cidadeEscolhida = JsonSerializer.Deserialize<Root>(json);
+            string json = await response.Content.ReadAsStringAsync();
+            Root cidadeEscolhida = JsonSerializer.Deserialize<Root>(json);
 
-                    string OlhaCeu = cidadeEscolhida.Weather[0].Description.ToUpperInvariant();
-                    return OlhaCeu;
-                }
-                else throw new Exception($"Nao encontrado: {ResultChamada.ReasonPhrase}");
-                
-            }
+            return cidadeEscolhida.Weather[0].Description.ToUpperInvariant();
         }
 
-        static string MostraNaTela(Root cidade2, double veloKM, int umidade)
+        private void AtualizarBotaoConcluido(Button botao, bool sucesso, string mensagemErro = "")
         {
-            string texto = $"{cidade2.Name} \nOs ventos estão há {veloKM} Km/H" +
-                $"\nTemperatura de {cidade2.Main.Temp}°C\nSensação de {cidade2.Main.FeelsLike}°C" +
-                $"\nUmidade do ar: {umidade}%";
-
-            return texto;
+            Brush corFundo = sucesso ? new SolidColorBrush(Color.FromRgb(22, 120, 48)) : new SolidColorBrush(Color.FromRgb(145, 10, 10));
+            botao.Background = corFundo;
+            botao.Foreground = Brushes.Wheat;
+            botao.Content = sucesso ? "Concluído" : mensagemErro;
         }
 
         private void Texto_SairComMouse(object sender, MouseEventArgs e)
         {
-            ((Button)sender).Content = "Buscar Clima";
             ((Button)sender).Background = Brushes.WhiteSmoke;
             ((Button)sender).Foreground = Brushes.Black;
+            ((Button)sender).Content = "Buscar Local";
         }
     }
 }
