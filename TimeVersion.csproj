@@ -136,6 +136,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelo\Coordenadas.cs" />
     <Compile Include="Modelo\Tempo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -9,16 +9,7 @@ using System.Threading.Tasks;
 namespace TimeVersion.Modelo
 {
 
-    public class Coord
-    {
-        [JsonPropertyName("lon")]
-        public double Lon { get; set; }
-
-        [JsonPropertyName("lat")]
-        public double Lat { get; set; }
-    }
-
-    public class Weather
+    public class Clima
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }
@@ -27,25 +18,25 @@ namespace TimeVersion.Modelo
         public string Main { get; set; }
 
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string Descricao { get; set; }
 
         [JsonPropertyName("icon")]
-        public string Icon { get; set; }
+        public string Icone { get; set; }
     }
 
     public class Main
     {
         [JsonPropertyName("temp")]
-        public double Temp { get; set; }
+        public double Temperatura { get; set; }
 
         [JsonPropertyName("feels_like")]
-        public double FeelsLike { get; set; }
+        public double SensacaoTermica { get; set; }
 
         [JsonPropertyName("temp_min")]
-        public double TempMin { get; set; }
+        public double TemperaturaMinima { get; set; }
 
         [JsonPropertyName("temp_max")]
-        public double TempMax { get; set; }
+        public double TemperaturaMaxima { get; set; }
 
         /// <summary>
         /// Pressao recebida da API em hPa (HectoPascal)
@@ -54,19 +45,19 @@ namespace TimeVersion.Modelo
         /// Necessario Fazer a conversão para Atm ou Bar
         /// </value>
         [JsonPropertyName("pressure")]
-        public int Pressure { get; set; }
+        public int Pressao { get; set; }
 
         [JsonPropertyName("humidity")]
-        public int Humidity { get; set; }
+        public int Umidade { get; set; }
 
         [JsonPropertyName("sea_level")]
-        public int SeaLevel { get; set; }
+        public int NivelDoMar { get; set; }
 
         [JsonPropertyName("grnd_level")]
-        public int GrndLevel { get; set; }
+        public int NivelDoSolo { get; set; }
     }
 
-    public class Wind
+    public class Vento
     {
         /// <summary>
         /// Velocidade do Vento em m/s
@@ -75,16 +66,16 @@ namespace TimeVersion.Modelo
         /// Converter para Km/Hr
         /// </value>
         [JsonPropertyName("speed")]
-        public double Speed { get; set; }
+        public double Velocidade { get; set; }
 
         [JsonPropertyName("deg")]
-        public int Deg { get; set; }
+        public int Grau { get; set; }
 
         [JsonPropertyName("gust")]
-        public double Gust { get; set; }
+        public double Rajadas { get; set; }
     }
 
-    public class Clouds
+    public class Nuvens
     {
         [JsonPropertyName("all")]
         public int All { get; set; }
@@ -93,22 +84,22 @@ namespace TimeVersion.Modelo
     public class Sys
     {
         [JsonPropertyName("country")]
-        public string Country { get; set; }
+        public string Pais { get; set; }
 
         [JsonPropertyName("sunrise")]
-        public long Sunrise { get; set; }
+        public long NascerDoSol { get; set; }
 
         [JsonPropertyName("sunset")]
-        public long Sunset { get; set; }
+        public long PorDoSol { get; set; }
     }
 
     public class Root
     {
         [JsonPropertyName("coord")]
-        public  Coord Coord { get; set; }
+        public  Coordenadas Coordenadas { get; set; }
 
         [JsonPropertyName("weather")]
-        public List<Weather> Weather { get; set; }
+        public List<Clima> Clima { get; set; }
 
         [JsonPropertyName("base")]
         public string Base { get; set; }
@@ -117,13 +108,13 @@ namespace TimeVersion.Modelo
         public  Main Main { get; set; }
 
         [JsonPropertyName("visibility")]
-        public int Visibility { get; set; }
+        public int Visibilidade { get; set; }
 
         [JsonPropertyName("wind")]
-        public  Wind Wind { get; set; }
+        public  Vento Vento { get; set; }
 
         [JsonPropertyName("clouds")]
-        public Clouds Clouds { get; set; }
+        public Nuvens Nuvens { get; set; }
 
         [JsonPropertyName("dt")]
         public long Dt { get; set; }
@@ -132,15 +123,15 @@ namespace TimeVersion.Modelo
         public Sys Sys { get; set; }
 
         [JsonPropertyName("timezone")]
-        public int Timezone { get; set; }
+        public int FusoHorario { get; set; }
 
         [JsonPropertyName("id")]
         public int Id { get; set; }
 
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string Nome { get; set; }
 
         [JsonPropertyName("cod")]
-        public int? Cod { get; set; }
+        public int? Codigo { get; set; }
     }
 }

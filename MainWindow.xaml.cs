@@ -51,10 +51,10 @@ namespace TimeVersion
             string json = await response.Content.ReadAsStringAsync();
             Root cidadeEscolhida = JsonSerializer.Deserialize<Root>(json);
 
-            double velocidadeVento = cidadeEscolhida.Wind.Speed;
-            int umidade = cidadeEscolhida.Main.Humidity;
+            double velocidadeVento = cidadeEscolhida.Vento.Velocidade;
+            int umidade = cidadeEscolhida.Main.Umidade;
 
-            return $"Temperatura: {cidadeEscolhida.Main.Temp}°C\nSensação: {cidadeEscolhida.Main.FeelsLike}°C\nVento: {velocidadeVento} Km/h\nUmidade: {umidade}%";
+            return $"Temperatura: {cidadeEscolhida.Main.Temperatura}°C\nSensação: {cidadeEscolhida.Main.SensacaoTermica}°C\nVento: {velocidadeVento} Km/h\nUmidade: {umidade}%";
         }
 
         private async Task<string> ObterDescricaoDoCeu(string cidade)
@@ -67,7 +67,7 @@ namespace TimeVersion
             string json = await response.Content.ReadAsStringAsync();
             Root cidadeEscolhida = JsonSerializer.Deserialize<Root>(json);
 
-            return cidadeEscolhida.Weather[0].Description.ToUpperInvariant();
+            return cidadeEscolhida.Clima[0].Descricao.ToUpperInvariant();
         }
 
         private void AtualizarBotaoConcluido(Button botao, bool sucesso, string mensagemErro = "")
