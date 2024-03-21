@@ -36,8 +36,14 @@ namespace TimeVersion
             }
             catch (HttpRequestException ex)
             {
-                string mensagemErro = ex.Message.Contains("Not Found") ? "Cidade Inexistente" : "Campo Vazio";
+                string mensagemErro;
+                if (ex.Message.Contains("Unauthorized"))
+                    mensagemErro = "Falha na API";
+                else
+                    mensagemErro = ex.Message.Contains("Not Found") ? "Cidade Inexistente" : "Campo Vazio";
+
                 AtualizarBotaoConcluido((Button)sender, false, mensagemErro);
+
             }
         }
 
