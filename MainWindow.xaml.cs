@@ -12,7 +12,6 @@ namespace TimeVersion
 {
     public partial class MainWindow : Window
     {
-        private const string apiKey = "f24e3b3b88dc280e84e540c4500113d5";
 
         Color corVerdeSucesso = Color.FromRgb(22, 120, 48); //Verde 
         Color corVermelhoAviso = Color.FromRgb(145, 10, 10); //Vermelho
@@ -27,8 +26,8 @@ namespace TimeVersion
                 string cidade = campo;
                 string previsao = await ObterPrevisaoDoTempo(cidade);
                 string previsao2 = await ObterDescricaoDoCeu(cidade);
-                txtResultado.Text = $"{previsao}";
-                txtTituloResultado.Text = $"{previsao2}";
+                labelResultado.Text = $"{previsao}";
+                labelTitulo.Text = $"{previsao2}";
 
                 ((Button)sender).Content = "Concluido";
 
@@ -96,7 +95,7 @@ namespace TimeVersion
 
         static string MostraNaTela(Root cidade2, double veloKM, int umidade)
         {
-            string texto = $"Tempo Local - {cidade2.Name} \nOs ventos estão há {veloKM} Km/H" +
+            string texto = $"{cidade2.Name} \nOs ventos estão há {veloKM} Km/H" +
                 $"\nTemperatura de {cidade2.Main.Temp}°C\nSensação de {cidade2.Main.FeelsLike}°C" +
                 $"\nUmidade do ar: {umidade}%";
 
