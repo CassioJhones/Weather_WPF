@@ -11,7 +11,7 @@ namespace TimeVersion
 {
     public partial class MainWindow : Window
     {
-        private const string ApiKey = "";
+        private const string ApiKey = "f24e3b3b88dc280e84e540c4500113d5";
         private readonly HttpClient _httpClient;
 
         public MainWindow()
@@ -28,7 +28,7 @@ namespace TimeVersion
             {
                 string previsao = await ObterPrevisaoDoTempo(cidade);
                 string previsaoDescricao = await ObterDescricaoDoCeu(cidade);
-
+                txtCidade.Text = "";
                 labelResultado.Text = previsao;
                 labelTitulo.Text = previsaoDescricao;
 
@@ -36,12 +36,7 @@ namespace TimeVersion
             }
             catch (HttpRequestException ex)
             {
-                string mensagemErro;
-                if (ex.Message.Contains("Unauthorized"))
-                    mensagemErro = "Falha na API";
-                else
-                    mensagemErro = ex.Message.Contains("Not Found") ? "Cidade Inexistente" : "Campo Vazio";
-
+                string mensagemErro = ex.Message.Contains("Unauthorized") ? "Falha na API" : ex.Message.Contains("Not Found") ? "Cidade Inexistente" : "Campo Vazio";
                 AtualizarBotaoConcluido((Button)sender, false, mensagemErro);
 
             }
@@ -60,7 +55,7 @@ namespace TimeVersion
             double velocidadeVento = cidadeEscolhida.Vento.Velocidade;
             int umidade = cidadeEscolhida.Main.Umidade;
 
-            return $"Temperatura: {cidadeEscolhida.Main.Temperatura}°C\nSensação: {cidadeEscolhida.Main.SensacaoTermica}°C\nVento: {velocidadeVento} Km/h\nUmidade: {umidade}%";
+            return $"{cidadeEscolhida.Nome} - {cidadeEscolhida.Sys.Pais}\nTemperatura: {cidadeEscolhida.Main.Temperatura}°C\nSensação: {cidadeEscolhida.Main.SensacaoTermica}°C\nVento: {velocidadeVento} Km/h\nUmidade: {umidade}%";
         }
 
         private async Task<string> ObterDescricaoDoCeu(string cidade)
@@ -73,7 +68,12 @@ namespace TimeVersion
             string json = await response.Content.ReadAsStringAsync();
             Root cidadeEscolhida = JsonSerializer.Deserialize<Root>(json);
 
-            return cidadeEscolhida.Clima[0].Descricao.ToUpperInvariant();
+            string titulo = cidadeEscolhida.Clima[0].Descricao.ToUpperInvariant();
+
+            if (titulo.Contains("NUVENS QUEBRADAS"))
+                titulo = "PARCIALMENTE NUBLADO";
+
+            return titulo;
         }
 
         private void AtualizarBotaoConcluido(Button botao, bool sucesso, string mensagemErro = "")
