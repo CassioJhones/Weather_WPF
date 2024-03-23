@@ -5,13 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Previsão do Tempo - V2.0" ShowDialogsOverTitleBar="True" TitleCharacterCasing="Normal"
+        Title="Previsão do Tempo - V2.0"
+        
+    ShowDialogsOverTitleBar="True" TitleCharacterCasing="Normal"
         WindowTitleBrush="{DynamicResource MahApps.Brushes.AccentBase}"
         BorderBrush="{DynamicResource MahApps.Brushes.AccentBase}" BorderThickness="0 0 0 0"
         TitleAlignment="Left" TitleBarHeight="20" 
         Height="350" Width="328"
         ResizeMode="NoResize"
-        AllowDrop="True" Icon="/faviconSol.png"   SnapsToDevicePixels="True" Topmost="True">
+        AllowDrop="True" Icon="/faviconSol.png"   SnapsToDevicePixels="True" Topmost="True"
+    >
+    
+
     <Grid Margin="0,0,0,0">
 
         <Grid.RowDefinitions>
