@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.ComponentModel;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
@@ -9,16 +10,35 @@ using TimeVersion.Modelo;
 
 namespace TimeVersion
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : INotifyPropertyChanged
     {
-        private const string ApiKey = "f24e3b3b88dc280e84e540c4500113d5";
+        public event PropertyChangedEventHandler PropertyChanged;
         private readonly HttpClient _httpClient;
 
+        private string _apiStatus = "Online";
+        public string ApiStatus
+        {
+            get { return _apiStatus; }
+            set
+            {
+                if (_apiStatus != value)
+                {
+                    _apiStatus = value;
+                    OnPropertyChanged(nameof(ApiStatus));
+                }
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
             _httpClient = new HttpClient();
+            DataContext = this;
+
+            if (ApiKey.Length < 32 || string.IsNullOrEmpty(ApiKey))
+                ApiStatus = "Offline";
         }
+
+        protected virtual void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         private async void BuscarPrevisaoClick(object sender, RoutedEventArgs evento)
         {

@@ -1,17 +1,23 @@
-﻿<Window x:Name="JanelaMain" x:Class="TimeVersion.MainWindow"
+﻿<mah:MetroWindow x:Name="JanelaMain" x:Class="TimeVersion.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-         Title="Previsão do Tempo" Height="350" Width="328" 
-        Background="White" ResizeMode="NoResize"
-        AllowDrop="True" Icon="/faviconSol.png"   SnapsToDevicePixels="True" >
+        Title="Previsão do Tempo - V2.0" ShowDialogsOverTitleBar="True" TitleCharacterCasing="Normal"
+        WindowTitleBrush="{DynamicResource MahApps.Brushes.AccentBase}"
+        BorderBrush="{DynamicResource MahApps.Brushes.AccentBase}" BorderThickness="0 0 0 0"
+        TitleAlignment="Left" TitleBarHeight="20" 
+        Height="350" Width="328"
+        ResizeMode="NoResize"
+        AllowDrop="True" Icon="/faviconSol.png"   SnapsToDevicePixels="True" Topmost="True">
     <Grid Margin="0,0,0,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="19*"/>
-            <ColumnDefinition Width="22*"/>
-        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="26px"/>
+        </Grid.RowDefinitions>
 
         <StackPanel 
                     VerticalAlignment="Top" Height="319"
@@ -41,8 +47,10 @@
                 <Button.Effect>
                     <DropShadowEffect Color="Black" Opacity="0.4" RenderingBias="Performance" ShadowDepth="4" BlurRadius="5" Direction="293" />
                 </Button.Effect>
-
             </Button>
+            <!--<Button Content="MahApps.Metro" Margin="30 30 30 0" Style="{StaticResource MahApps.Styles.Button.Dialogs.AccentHighlight  }"/>-->
+
+
             <TextBlock Width="234" Height="36"
                        x:Name="labelTitulo"
                        FontSize="18"
@@ -65,6 +73,28 @@
             </TextBlock>
 
         </StackPanel>
+
+        <!--STATUS DA WEATHER_API-->
+        <StatusBar Grid.Row="1" Padding="10 0 0 0">
+            <StatusBarItem Content="API Status:" FontSize="12"/>
+            <StatusBarItem FontSize="12" FontWeight="SemiBold">
+
+                <StatusBarItem.Style>
+                    <Style TargetType="StatusBarItem">
+                        <Setter Property="Foreground" Value="LawnGreen"/>
+                        <!-- Cor padrão quando online -->
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ApiStatus}" Value="Offline">
+                                <Setter Property="Foreground" Value="DarkRed"/>
+                                <!-- Cor quando offline -->
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StatusBarItem.Style>
+
+                <TextBlock Text="{Binding ApiStatus}"/>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 
-</Window>
+</mah:MetroWindow>
