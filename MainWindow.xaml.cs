@@ -13,7 +13,6 @@ namespace TimeVersion
     public partial class MainWindow : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private const string ApiKey = "f24e3b3b88dc280e84e540c4500113d5";
         private readonly HttpClient _httpClient;
         private string _apiStatus = "Online";
         public string ApiStatus
@@ -133,6 +132,11 @@ namespace TimeVersion
             }
 
             return response;
+        }
+
+        private void Limpar_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

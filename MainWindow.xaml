@@ -5,56 +5,65 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Previsão do Tempo - V2.0"
-        
-    ShowDialogsOverTitleBar="True" TitleCharacterCasing="Normal"
+        Title="Open Weather API"    ShowDialogsOverTitleBar="True" TitleCharacterCasing="Normal"
         WindowTitleBrush="{DynamicResource MahApps.Brushes.AccentBase}"
-        BorderBrush="{DynamicResource MahApps.Brushes.AccentBase}" BorderThickness="0 0 0 0"
-        TitleAlignment="Left" TitleBarHeight="20" 
-        Height="350" Width="328"
-        ResizeMode="NoResize"
-        AllowDrop="True" Icon="/faviconSol.png"   SnapsToDevicePixels="True" Topmost="True"
+                 BorderBrush="{DynamicResource MahApps.Brushes.AccentBase}" BorderThickness="0 0 0 0"
+        TitleAlignment="Center" TitleBarHeight="25" 
+                 Height="350" Width="328"
+        ResizeMode="CanResize"
+                 AllowDrop="True" Icon="/faviconSol.png"   SnapsToDevicePixels="True" Topmost="True"
     >
-    
 
-    <Grid Margin="0,0,0,0">
+
+    <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="26px"/>
+            <RowDefinition Height="30px"/>
         </Grid.RowDefinitions>
 
-        <StackPanel 
-                    VerticalAlignment="Top" Height="319"
-                    Margin="37,5,37,0" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" >
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    MaxHeight="720"
+                    Width="340"
+                    Margin="0,0,0,0"  >
+                    
 
-            <TextBlock HorizontalAlignment="Center" Text="Previsão do Tempo" FontSize="20" FontWeight="Bold" Margin="0,10,0,20" Height="32"/>
+            <TextBlock HorizontalAlignment="Center" Text="" FontSize="20" FontWeight="Bold" Margin="0,0,0,30"/>
 
-            <StackPanel Orientation="Horizontal" Margin="-5,0,0,10">
-                <Label Content="Local:" Width="57" FontFamily="JetBrains Mono" FontWeight="Bold"  Foreground="#FF020000" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="9,5,0,5"/>
-                <TextBox x:Name="txtCidade" AcceptsReturn="False" Width="151" VerticalContentAlignment="Center" BorderThickness="1,0,0,1"/>
-            </StackPanel>
+                <TextBox x:Name="txtCidade" AcceptsReturn="False" Width="170"
+                         HorizontalAlignment="Center" BorderThickness="1,1,1,1"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
 
             <Button x:Name="botaoPrincipal" BorderThickness="0,0,0,0"
-                    Content="Buscar Clima"
-                    Width="150" Height="40"
+                    Content="Buscar Local"
+                    Width="130" Height="40"
                     Click="BuscarPrevisaoClick"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    UseLayoutRounding="False"
-                    FontWeight="Medium"
-                    FontSize="14"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    FontWeight="Medium" FontSize="14"
                     IsDefault="True" Cursor="Hand"
-                    ToolTip="Buscar o clima da cidade digitada"
                     MouseLeave="Texto_SairComMouse">
                 <Button.Effect>
                     <DropShadowEffect Color="Black" Opacity="0.4" RenderingBias="Performance" ShadowDepth="4" BlurRadius="5" Direction="293" />
                 </Button.Effect>
             </Button>
-            <!--<Button Content="MahApps.Metro" Margin="30 30 30 0" Style="{StaticResource MahApps.Styles.Button.Dialogs.AccentHighlight  }"/>-->
 
+            <Button
+                Margin="20 0 0 0"
+                Content="Limpar"
+                Width="80" Height="40"
+                Click="Limpar_Click"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                VerticalAlignment="Center" HorizontalAlignment="Center"
+                FontWeight="Medium" FontSize="14"
+                IsDefault="False" Cursor="Hand">
+                <Button.Effect>
+                    <DropShadowEffect Color="Black" Opacity="0.4" RenderingBias="Performance" ShadowDepth="4" BlurRadius="5" Direction="293" />
+                </Button.Effect>
+            </Button>
+            </StackPanel>
 
             <TextBlock Width="234" Height="36"
                        x:Name="labelTitulo"
@@ -101,5 +110,4 @@
             </StatusBarItem>
         </StatusBar>
     </Grid>
-
 </mah:MetroWindow>
