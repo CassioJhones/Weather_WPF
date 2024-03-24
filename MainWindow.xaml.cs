@@ -57,6 +57,19 @@ namespace TimeVersion
                 }
             }
         }
+        private string _corResultado = "SlateBlue";
+        public string CorResultado
+        {
+            get { return _corResultado; }
+            set
+            {
+                if (_corResultado != value)
+                {
+                    _corResultado = value;
+                    OnPropertyChanged(nameof(CorResultado));
+                }
+            }
+        }
 
         #endregion Propriedades e Constantes
         public MainWindow()
@@ -82,19 +95,16 @@ namespace TimeVersion
             {
                 string previsao = await ObterPrevisaoDoTempo(cidade);
                 string previsaoDescricao = await ObterDescricaoDoCeu(cidade);
-                txtCidade.Text = "";
-                labelResultado.Text = previsao;
-                labelTitulo.Text = previsaoDescricao;
-
                 ResultadoPesquisa = previsao;
                 TituloResultadoPesquisa = previsaoDescricao;
-
-                AtualizarBotaoConcluido((Button)sender, true);
+                CorResultado = "SlateBlue";
             }
             catch (HttpRequestException ex)
             {
-                string mensagemErro = ex.Message.Contains("Unauthorized") ? "Falha na API" : ex.Message.Contains("Not Found") ? "Cidade Inexistente" : "Campo Vazio";
-                AtualizarBotaoConcluido((Button)sender, false, mensagemErro);
+                string mensagemErro = ex.Message.Contains("Unauthorized")
+                    ? "Falha na API" : ex.Message.Contains("Not Found") ? "Cidade Inexistente" : "Campo Vazio";
+                TituloResultadoPesquisa = mensagemErro;
+                CorResultado = "Red";
             }
         }
 
@@ -130,13 +140,6 @@ namespace TimeVersion
 
             return titulo;
         }
-        private void AtualizarBotaoConcluido(Button botao, bool sucesso, string mensagemErro = "")
-        {
-            Brush corFundo = sucesso ? new SolidColorBrush(Color.FromRgb(22, 120, 48)) : new SolidColorBrush(Color.FromRgb(145, 10, 10));
-            botao.Background = corFundo;
-            botao.Foreground = Brushes.Wheat;
-            botao.Content = sucesso ? "Concluído" : mensagemErro;
-        }
         private async Task CheckApiStatus()
         {
             HttpResponseMessage response = await GetApi();
@@ -157,7 +160,6 @@ namespace TimeVersion
 
             return response;
         }
-
         private void Limpar_Click(object sender, RoutedEventArgs e)
         {
             ResultadoPesquisa = "";

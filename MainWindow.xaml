@@ -11,7 +11,7 @@
         TitleAlignment="Center" TitleBarHeight="25" 
         ResizeMode="NoResize" Title="Open Weather API"
         Height="350" Width="328" SaveWindowPosition="True"
-        AllowDrop="True" Icon="/faviconSol.png" Topmost="True">
+        AllowDrop="True" Icon="/faviconSol.png" Topmost="False">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -28,9 +28,9 @@
                 Text="{Binding TituloResultadoPesquisa}"
                 Width="234" Height="36"
                 TextAlignment="Center"
-                Foreground="SlateBlue"
+                Foreground="{Binding CorResultado}"
                 HorizontalAlignment="Center" 
-                FontSize="20" FontWeight="Bold"
+                FontSize="17" FontWeight="Bold"
                 Margin="0,20,0,10"/>
 
                 <TextBox x:Name="txtCidade"
