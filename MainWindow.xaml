@@ -35,8 +35,13 @@
                 Margin="0,20,0,10"/>
 
                 <TextBox x:Name="txtCidade"
+                         mah:TextBoxHelper.UseFloatingWatermark="True"
+                         mah:TextBoxHelper.AutoWatermark="True"
+                         
+                         mah:TextBoxHelper.Watermark="Digite um local"
+                         
                          AcceptsReturn="False" Width="220"
-                         HorizontalAlignment="Center" BorderThickness="2,0,0,1" Text="{Binding MUDAR_AQUI}"
+                         HorizontalAlignment="Center" BorderThickness="2 0 0 1" Text="{Binding MUDAR_AQUI}"
                          SelectionBrush="SlateBlue" FontSize="18" BorderBrush="SlateBlue"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 16 0 0" >
@@ -49,6 +54,9 @@
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     FontWeight="Medium" FontSize="14"
+                    mah:ControlsHelper.CornerRadius="8"
+                    mah:ControlsHelper.ContentCharacterCasing="Normal"       
+                    mah:ControlsHelper.FocusBorderThickness="0"
                     IsDefault="True" Cursor="Hand">
                     <Button.Effect>
                         <DropShadowEffect Color="Black" Opacity="0.4"
@@ -58,12 +66,15 @@
 
                 <Button x:Name="botaoLimpar"
                     Click="Limpar_Click"
-                    Margin="20 0 0 0"
+                    Margin="10 0 0 0"
                     Content="Limpar"
                     Width="80" Height="40"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     FontWeight="Medium" FontSize="14"
+                        mah:ControlsHelper.CornerRadius="8"
+                    mah:ControlsHelper.ContentCharacterCasing="Normal"       
+                    mah:ControlsHelper.FocusBorderThickness="0"
                     IsDefault="False" Cursor="Hand">
                     <Button.Effect>
                         <DropShadowEffect Color="Black" Opacity="0.4"
@@ -74,15 +85,15 @@
 
             <TextBlock x:Name="labelResultado" 
                 Text="{Binding ResultadoPesquisa}"
-                       Foreground="Black"
-                       TextWrapping="Wrap"
-                       Height="150"
-                       FontWeight="DemiBold"
-                       FontSize="17"
-                       Margin="0"
-                       Padding="0,10,0,0"
-                       TextAlignment="Center"
-                       Width="auto">
+                Foreground="Black"
+                TextWrapping="Wrap"
+                Height="150"
+                FontWeight="DemiBold"
+                FontSize="17"
+                Margin="0"
+                Padding="0,10,0,0"
+                TextAlignment="Center"
+                Width="auto">
             </TextBlock>
             
         </StackPanel>
