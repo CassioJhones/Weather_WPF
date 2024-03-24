@@ -5,13 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Open Weather API"
         ShowDialogsOverTitleBar="True" TitleCharacterCasing="Normal"
         WindowTitleBrush="{DynamicResource MahApps.Brushes.AccentBase}"
         BorderBrush="{DynamicResource MahApps.Brushes.AccentBase}" BorderThickness="0 0 0 0"
         TitleAlignment="Center" TitleBarHeight="25" 
-        Height="350" Width="328"
-        ResizeMode="NoResize"
+        ResizeMode="NoResize" Title="Open Weather API"
+        Height="350" Width="328" SaveWindowPosition="True"
         AllowDrop="True" Icon="/faviconSol.png" Topmost="True">
     <Grid>
         <Grid.RowDefinitions>
@@ -37,9 +36,7 @@
                 <TextBox x:Name="txtCidade"
                          mah:TextBoxHelper.UseFloatingWatermark="True"
                          mah:TextBoxHelper.AutoWatermark="True"
-                         
                          mah:TextBoxHelper.Watermark="Digite um local"
-                         
                          AcceptsReturn="False" Width="220"
                          HorizontalAlignment="Center" BorderThickness="2 0 0 1" Text="{Binding MUDAR_AQUI}"
                          SelectionBrush="SlateBlue" FontSize="18" BorderBrush="SlateBlue"/>
@@ -49,15 +46,15 @@
                 <Button x:Name="botaoPrincipal"
                     Click="BuscarPrevisaoClick"
                     BorderThickness="0"
-                    Content="Buscar Local"
-                    Width="130" Height="40"
+                    Content="Buscar"
+                    Width="100" Height="40"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     FontWeight="Medium" FontSize="14"
                     mah:ControlsHelper.CornerRadius="8"
                     mah:ControlsHelper.ContentCharacterCasing="Normal"       
                     mah:ControlsHelper.FocusBorderThickness="0"
-                    IsDefault="True" Cursor="Hand">
+                    IsDefault="True" Cursor="Arrow">
                     <Button.Effect>
                         <DropShadowEffect Color="Black" Opacity="0.4"
                                           ShadowDepth="4" BlurRadius="5" Direction="293" />
@@ -66,16 +63,16 @@
 
                 <Button x:Name="botaoLimpar"
                     Click="Limpar_Click"
-                    Margin="10 0 0 0"
+                    Margin="20 0 0 0"
                     Content="Limpar"
-                    Width="80" Height="40"
+                    Width="100" Height="40"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     FontWeight="Medium" FontSize="14"
-                        mah:ControlsHelper.CornerRadius="8"
+                    mah:ControlsHelper.CornerRadius="8"
                     mah:ControlsHelper.ContentCharacterCasing="Normal"       
                     mah:ControlsHelper.FocusBorderThickness="0"
-                    IsDefault="False" Cursor="Hand">
+                    IsDefault="False" Cursor="Arrow">
                     <Button.Effect>
                         <DropShadowEffect Color="Black" Opacity="0.4"
                                           ShadowDepth="4" BlurRadius="5" Direction="293" />

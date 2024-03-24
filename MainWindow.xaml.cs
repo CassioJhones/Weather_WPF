@@ -71,9 +71,7 @@ namespace TimeVersion
         }
         
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            await CheckApiStatus();
-        }
+            => await CheckApiStatus();
         protected virtual void OnPropertyChanged(string propertyName)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         
