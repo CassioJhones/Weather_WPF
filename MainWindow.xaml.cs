@@ -104,12 +104,6 @@ namespace TimeVersion
             botao.Foreground = Brushes.Wheat;
             botao.Content = sucesso ? "Concluído" : mensagemErro;
         }
-        private void Texto_SairComMouse(object sender, MouseEventArgs e)
-        {
-            ((Button)sender).Background = Brushes.WhiteSmoke;
-            ((Button)sender).Foreground = Brushes.Black;
-            ((Button)sender).Content = "Buscar Local";
-        }
         private async Task CheckApiStatus()
         {
             HttpResponseMessage response = await GetApi();

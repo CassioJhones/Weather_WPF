@@ -5,18 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Open Weather API"    ShowDialogsOverTitleBar="True" TitleCharacterCasing="Normal"
+        Title="Open Weather API"
+        ShowDialogsOverTitleBar="True" TitleCharacterCasing="Normal"
         WindowTitleBrush="{DynamicResource MahApps.Brushes.AccentBase}"
-                 BorderBrush="{DynamicResource MahApps.Brushes.AccentBase}" BorderThickness="0 0 0 0"
+        BorderBrush="{DynamicResource MahApps.Brushes.AccentBase}" BorderThickness="0 0 0 0"
         TitleAlignment="Center" TitleBarHeight="25" 
-                 Height="350" Width="328"
-        ResizeMode="CanResize"
-                 AllowDrop="True" Icon="/faviconSol.png"   SnapsToDevicePixels="True" Topmost="True"
-    >
-
-
+        Height="350" Width="328"
+        ResizeMode="NoResize"
+        AllowDrop="True" Icon="/faviconSol.png" Topmost="True">
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30px"/>
@@ -27,85 +24,81 @@
                     MaxHeight="720"
                     Width="340"
                     Margin="0,0,0,0"  >
-                    
 
-            <TextBlock HorizontalAlignment="Center" Text="" FontSize="20" FontWeight="Bold" Margin="0,0,0,30"/>
+            <TextBlock x:Name="labelTitulo"
+                Text="{Binding MUDAR_AQUI}"
+                Width="234" Height="36"
+                TextAlignment="Center"
+                Foreground="SlateBlue"
+                HorizontalAlignment="Center" 
+                FontSize="20" FontWeight="Bold"
+                Margin="0,20,0,10"/>
 
-                <TextBox x:Name="txtCidade" AcceptsReturn="False" Width="170"
-                         HorizontalAlignment="Center" BorderThickness="1,1,1,1"/>
+                <TextBox x:Name="txtCidade"
+                         AcceptsReturn="False" Width="220"
+                         HorizontalAlignment="Center" BorderThickness="2,0,0,1" Text="{Binding MUDAR_AQUI}"
+                         SelectionBrush="SlateBlue" FontSize="18" BorderBrush="SlateBlue"/>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 16 0 0" >
 
-            <Button x:Name="botaoPrincipal" BorderThickness="0,0,0,0"
+                <Button x:Name="botaoPrincipal"
+                    Click="BuscarPrevisaoClick"
+                    BorderThickness="0"
                     Content="Buscar Local"
                     Width="130" Height="40"
-                    Click="BuscarPrevisaoClick"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     FontWeight="Medium" FontSize="14"
-                    IsDefault="True" Cursor="Hand"
-                    MouseLeave="Texto_SairComMouse">
-                <Button.Effect>
-                    <DropShadowEffect Color="Black" Opacity="0.4" RenderingBias="Performance" ShadowDepth="4" BlurRadius="5" Direction="293" />
-                </Button.Effect>
-            </Button>
+                    IsDefault="True" Cursor="Hand">
+                    <Button.Effect>
+                        <DropShadowEffect Color="Black" Opacity="0.4"
+                                          ShadowDepth="4" BlurRadius="5" Direction="293" />
+                    </Button.Effect>
+                </Button>
 
-            <Button
-                Margin="20 0 0 0"
-                Content="Limpar"
-                Width="80" Height="40"
-                Click="Limpar_Click"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                VerticalAlignment="Center" HorizontalAlignment="Center"
-                FontWeight="Medium" FontSize="14"
-                IsDefault="False" Cursor="Hand">
-                <Button.Effect>
-                    <DropShadowEffect Color="Black" Opacity="0.4" RenderingBias="Performance" ShadowDepth="4" BlurRadius="5" Direction="293" />
-                </Button.Effect>
-            </Button>
+                <Button x:Name="botaoLimpar"
+                    Click="Limpar_Click"
+                    Margin="20 0 0 0"
+                    Content="Limpar"
+                    Width="80" Height="40"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    FontWeight="Medium" FontSize="14"
+                    IsDefault="False" Cursor="Hand">
+                    <Button.Effect>
+                        <DropShadowEffect Color="Black" Opacity="0.4"
+                                          ShadowDepth="4" BlurRadius="5" Direction="293" />
+                    </Button.Effect>
+                </Button>
             </StackPanel>
-
-            <TextBlock Width="234" Height="36"
-                       x:Name="labelTitulo"
-                       FontSize="18"
-                       TextAlignment="Center"
-                       FontWeight="Bold"
-                       Foreground="SlateBlue"
-                       Margin="0,20,0,0"
-                       Text="" />
 
             <TextBlock x:Name="labelResultado" 
                        Foreground="Black"
                        TextWrapping="Wrap"
-                       Height="125"
+                       Height="150"
                        FontWeight="DemiBold"
-                       Margin="0,0,0,0"
-                       Padding="0,0,0,0"
+                       FontSize="17"
+                       Margin="0"
+                       Padding="0,10,0,0"
                        TextAlignment="Center"
-                       Width="236">
-
+                       Width="auto">
             </TextBlock>
-
+            
         </StackPanel>
 
-        <!--STATUS DA WEATHER_API-->
         <StatusBar Grid.Row="1" Padding="10 0 0 0">
             <StatusBarItem Content="API Status:" FontSize="12"/>
             <StatusBarItem FontSize="12" FontWeight="SemiBold">
-
                 <StatusBarItem.Style>
                     <Style TargetType="StatusBarItem">
                         <Setter Property="Foreground" Value="LawnGreen"/>
-                        <!-- Cor padrão quando online -->
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ApiStatus}" Value="Offline">
                                 <Setter Property="Foreground" Value="DarkRed"/>
-                                <!-- Cor quando offline -->
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </StatusBarItem.Style>
-
                 <TextBlock Text="{Binding ApiStatus}"/>
             </StatusBarItem>
         </StatusBar>
