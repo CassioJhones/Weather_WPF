@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TimeVersion.Modelo
+namespace TimeVersion.Deserializacao
 {
 
     public class Root
     {
         [JsonPropertyName("coord")]
-        public  Coordenadas Coordenadas { get; set; }
+        public Coordenadas Coordenadas { get; set; }
 
         [JsonPropertyName("weather")]
         public List<Clima> Clima { get; set; }
@@ -21,13 +16,13 @@ namespace TimeVersion.Modelo
         public string Base { get; set; }
 
         [JsonPropertyName("main")]
-        public  Main Main { get; set; }
+        public Main Main { get; set; }
 
         [JsonPropertyName("visibility")]
         public int Visibilidade { get; set; }
 
         [JsonPropertyName("wind")]
-        public  Vento Vento { get; set; }
+        public Vento Vento { get; set; }
 
         [JsonPropertyName("clouds")]
         public Nuvens Nuvens { get; set; }

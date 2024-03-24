@@ -26,7 +26,7 @@
                     Margin="0,0,0,0"  >
 
             <TextBlock x:Name="labelTitulo"
-                Text="{Binding MUDAR_AQUI}"
+                Text="{Binding TituloResultadoPesquisa}"
                 Width="234" Height="36"
                 TextAlignment="Center"
                 Foreground="SlateBlue"
@@ -73,6 +73,7 @@
             </StackPanel>
 
             <TextBlock x:Name="labelResultado" 
+                Text="{Binding ResultadoPesquisa}"
                        Foreground="Black"
                        TextWrapping="Wrap"
                        Height="150"

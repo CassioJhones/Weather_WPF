@@ -152,13 +152,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modelo\Clima.cs" />
-    <Compile Include="Modelo\Coordenadas.cs" />
-    <Compile Include="Modelo\Main.cs" />
-    <Compile Include="Modelo\Nuvens.cs" />
-    <Compile Include="Modelo\Sys.cs" />
-    <Compile Include="Modelo\Tempo.cs" />
-    <Compile Include="Modelo\Vento.cs" />
+    <Compile Include="Deserializacao\Clima.cs" />
+    <Compile Include="Deserializacao\Coordenadas.cs" />
+    <Compile Include="Deserializacao\Main.cs" />
+    <Compile Include="Deserializacao\Nuvens.cs" />
+    <Compile Include="Deserializacao\Sys.cs" />
+    <Compile Include="Deserializacao\Tempo.cs" />
+    <Compile Include="Deserializacao\Vento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -202,6 +202,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="faviconSol.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

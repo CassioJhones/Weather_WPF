@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TimeVersion.Modelo
+namespace TimeVersion.Deserializacao
 {
     public class Sys
     {
