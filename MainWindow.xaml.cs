@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 using TimeVersion.Deserializacao;
 
 namespace TimeVersion
@@ -16,8 +14,7 @@ namespace TimeVersion
 
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly HttpClient _httpClient;
-        private string _apiStatus = "Online";
-
+        private const string ApiKey = "f24e3b3b88dc280e84e540c4500113d5";
         private string _apiStatus = "";
         public string ApiStatus
         {
@@ -82,13 +79,13 @@ namespace TimeVersion
                 ApiStatus = "Offline";
             Loaded += MainWindow_Loaded;
         }
-        
+
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
             => await CheckApiStatus();
         protected virtual void OnPropertyChanged(string propertyName)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        
-        private async void BuscarPrevisaoClick(object sender, RoutedEventArgs evento)
+
+        public async void BuscarPrevisaoClick(object sender, RoutedEventArgs evento)
         {
             string cidade = txtCidade.Text.Trim();
             try
@@ -108,7 +105,7 @@ namespace TimeVersion
             }
         }
 
-        private async Task<string> ObterPrevisaoDoTempo(string cidade)
+        public async Task<string> ObterPrevisaoDoTempo(string cidade)
         {
             string apiUrl = $"http://api.openweathermap.org/data/2.5/weather?q={cidade}&appid={ApiKey}&units=metric&lang=pt";
             HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
@@ -121,9 +118,10 @@ namespace TimeVersion
             double velocidadeVento = cidadeEscolhida.Vento.Velocidade;
             int umidade = cidadeEscolhida.Main.Umidade;
 
-            return $"{cidadeEscolhida.Nome} - {cidadeEscolhida.Sys.Pais}\nTemperatura: {cidadeEscolhida.Main.Temperatura}°C\nSensação: {cidadeEscolhida.Main.SensacaoTermica}°C\nVento: {velocidadeVento} Km/h\nUmidade: {umidade}%";
+            string frase = $"{cidadeEscolhida.Nome} - {cidadeEscolhida.Sys.Pais}\nTemperatura: {cidadeEscolhida.Main.Temperatura}°C\nSensação: {cidadeEscolhida.Main.SensacaoTermica}°C\nVento: {velocidadeVento} Km/h\nUmidade: {umidade}%";
+            return frase;
         }
-        private async Task<string> ObterDescricaoDoCeu(string cidade)
+        public async Task<string> ObterDescricaoDoCeu(string cidade)
         {
             string apiUrl = $"http://api.openweathermap.org/data/2.5/weather?q={cidade}&appid={ApiKey}&units=metric&lang=pt";
             HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
@@ -140,12 +138,12 @@ namespace TimeVersion
 
             return titulo;
         }
-        private async Task CheckApiStatus()
+        public async Task CheckApiStatus()
         {
             HttpResponseMessage response = await GetApi();
             ApiStatus = !response.IsSuccessStatusCode ? "Offline" : "Online";
         }
-        private async Task<HttpResponseMessage> GetApi()
+        public async Task<HttpResponseMessage> GetApi()
         {
             string apiUrl = $"http://api.openweathermap.org/data/2.5/weather?q=brasil&appid={ApiKey}&units=metric&lang=pt";
             HttpResponseMessage response = null;
@@ -156,14 +154,23 @@ namespace TimeVersion
                 response.EnsureSuccessStatusCode();
             }
             catch (HttpRequestException)
-            {return response;}
+            { return response; }
 
             return response;
         }
-        private void Limpar_Click(object sender, RoutedEventArgs e)
+        public void Limpar_Click(object sender, RoutedEventArgs e)
         {
             ResultadoPesquisa = "";
             TituloResultadoPesquisa = "";
+        }
+
+        public void Pesquisar_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(ResultadoPesquisa)) return;
+
+            string cortaCidade = ResultadoPesquisa.Replace("-", "|").Split('|')[0].Trim();
+            Process.Start($"https://pt.wikipedia.org/wiki/{cortaCidade}");
+            Process.Start($"https://www.google.com.br/maps/place/{cortaCidade}");
         }
     }
 }
