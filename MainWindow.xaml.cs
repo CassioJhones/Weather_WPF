@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using MahApps.Metro.SimpleChildWindow;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Text.Json;
@@ -166,7 +167,13 @@ namespace TimeVersion
 
         public void Pesquisar_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(ResultadoPesquisa)) return;
+            if (string.IsNullOrEmpty(ResultadoPesquisa))
+            {
+                Mensagem janela = new Mensagem();
+                Application.Current.MainWindow.ShowChildWindowAsync(janela, ChildWindowManager.OverlayFillBehavior.FullWindow);
+                return;
+            }
+
 
             string cortaCidade = ResultadoPesquisa.Replace("-", "|").Split('|')[0].Trim();
             Process.Start($"https://pt.wikipedia.org/wiki/{cortaCidade}");
