@@ -171,6 +171,7 @@ namespace TimeVersion
             {
                 Mensagem janela = new Mensagem();
                 Application.Current.MainWindow.ShowChildWindowAsync(janela, ChildWindowManager.OverlayFillBehavior.FullWindow);
+               
                 return;
             }
 
