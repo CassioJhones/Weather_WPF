@@ -28,7 +28,7 @@
             VerticalAlignment="Top"
             MaxHeight="720"
             Width="340"
-            Margin="0,0,0,0"  >
+            Margin="0,0,0,0" Background="White"  >
 
             <TextBlock x:Name="labelTitulo"
                 Text="{Binding TituloResultadoPesquisa}"

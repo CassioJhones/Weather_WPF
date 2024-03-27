@@ -7,11 +7,11 @@ using System.Windows;
 // As informações gerais sobre um assembly são controladas por
 // conjunto de atributos. Altere estes valores de atributo para modificar as informações
 // associada a um assembly.
-[assembly: AssemblyTitle("TimeVersion")]
+[assembly: AssemblyTitle("SeeTheWeatherAPI")]
 [assembly: AssemblyDescription("Previsao do tempo com OpenWeatherMap")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Independente")]
-[assembly: AssemblyProduct("TimeVersion")]
+[assembly: AssemblyProduct("SeeTheWeatherAPI")]
 [assembly: AssemblyCopyright("Cassio Jhones")]
 [assembly: AssemblyTrademark("Cassio Jhones")]
 [assembly: AssemblyCulture("")]
