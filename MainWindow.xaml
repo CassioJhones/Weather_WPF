@@ -7,12 +7,20 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         ShowDialogsOverTitleBar="True" TitleCharacterCasing="Normal"
-        WindowTitleBrush="{DynamicResource MahApps.Brushes.AccentBase}"
-        BorderBrush="{DynamicResource MahApps.Brushes.AccentBase}" BorderThickness="0 0 0 0"
+        WindowTitleBrush="DarkSlateGray"
+        BorderBrush="DarkSlateGray"
+        GlowBrush="DarkSlateGray"
+        NonActiveGlowBrush="Gray"
+        BorderThickness="2 0 2 0"
+        NonActiveBorderBrush="Gray"
+        NonActiveWindowTitleBrush="Gray"
         TitleAlignment="Center" TitleBarHeight="25" 
-        ResizeMode="NoResize" Title="Open Weather API"
-        Height="350" Width="328" SaveWindowPosition="True"
-        AllowDrop="True" Icon="/faviconSol.png" Topmost="False">
+        ResizeMode="NoResize" Title="See the Weather API"
+        Height="350"
+                 Width="328"
+                 SaveWindowPosition="True"
+        AllowDrop="True"
+                 Topmost="True">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -52,13 +60,13 @@
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     FontWeight="Medium" FontSize="14"
-                    mah:ControlsHelper.CornerRadius="8"
+                    mah:ControlsHelper.CornerRadius="5"
                     mah:ControlsHelper.ContentCharacterCasing="Normal"       
                     mah:ControlsHelper.FocusBorderThickness="0"
                     IsDefault="True" Cursor="Arrow">
                     <Button.Effect>
-                        <DropShadowEffect Color="Black" Opacity="0.4"
-                                          ShadowDepth="4" BlurRadius="5" Direction="293" />
+                        <DropShadowEffect Color="DarkSlateGray" Opacity="2"
+                                          ShadowDepth="3" BlurRadius="8" Direction="320" />
                     </Button.Effect>
                 </Button>
 
@@ -66,36 +74,35 @@
                     Click="Limpar_Click"
                     Margin="20 0 0 0"
                     Content="Limpar"
-                        BorderThickness="0.5"
+                        BorderThickness="1.5"
                     Width="100" Height="40"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     FontWeight="Medium" FontSize="14"
-                    mah:ControlsHelper.CornerRadius="8"
+                    mah:ControlsHelper.CornerRadius="5"
                     mah:ControlsHelper.ContentCharacterCasing="Normal"       
                     mah:ControlsHelper.FocusBorderThickness="0"
                     IsDefault="False" Cursor="Arrow">
                     <Button.Effect>
-                        <DropShadowEffect Color="Black" Opacity="0.4"
-                                          ShadowDepth="4" BlurRadius="5" Direction="293" />
+                        <DropShadowEffect Color="DarkSlateGray" Opacity="2"
+                                          ShadowDepth="3" BlurRadius="8" Direction="320" />
                     </Button.Effect>
                 </Button>
             </StackPanel>
 
             <TextBlock x:Name="labelResultado" 
                 Text="{Binding ResultadoPesquisa}"
-                Foreground="Black"
+                Foreground="DarkSlateGray"
                 TextWrapping="Wrap"
-                Height="150"
+                Height="140"
                 FontWeight="DemiBold"
-                FontSize="17"
+                FontSize="16"
                 Margin="0"
                 Padding="0,10,0,0"
                 TextAlignment="Center"
                 Width="auto">
             </TextBlock>
         </StackPanel>
-
 
         <StatusBar Grid.Row="3" Padding="10 0 0 0">
             <StatusBarItem Content="API Status:" FontSize="12"/>

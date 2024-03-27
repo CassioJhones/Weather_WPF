@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.SimpleChildWindow;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.Http;
@@ -115,12 +116,21 @@ namespace TimeVersion
 
             string json = await response.Content.ReadAsStringAsync();
             Root cidadeEscolhida = JsonSerializer.Deserialize<Root>(json);
-
+            
+            string paisDescricao = GetEnumDescription(cidadeEscolhida.Sys.Pais);
             double velocidadeVento = cidadeEscolhida.Vento.Velocidade;
             int umidade = cidadeEscolhida.Main.Umidade;
 
-            string frase = $"{cidadeEscolhida.Nome} - {cidadeEscolhida.Sys.Pais}\nTemperatura: {cidadeEscolhida.Main.Temperatura}°C\nSensação: {cidadeEscolhida.Main.SensacaoTermica}°C\nVento: {velocidadeVento} Km/h\nUmidade: {umidade}%";
+            string frase = $"{cidadeEscolhida.Nome} - {paisDescricao}\nTemperatura: {cidadeEscolhida.Main.Temperatura}°C\nSensação: {cidadeEscolhida.Main.SensacaoTermica}°C\nVento: {velocidadeVento} Km/h\nUmidade: {umidade}%";
             return frase;
+        }
+        public static string GetEnumDescription(Enum value)
+        {
+            var fieldInfo = value.GetType().GetField(value.ToString());
+
+            var attributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            return attributes.Length > 0 ? attributes[0].Description : value.ToString();
         }
         public async Task<string> ObterDescricaoDoCeu(string cidade)
         {

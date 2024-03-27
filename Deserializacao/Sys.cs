@@ -5,7 +5,8 @@ namespace TimeVersion.Deserializacao
     public class Sys
     {
         [JsonPropertyName("country")]
-        public string Pais { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public EPaises Pais { get; set; }
 
         [JsonPropertyName("sunrise")]
         public long NascerDoSol { get; set; }
