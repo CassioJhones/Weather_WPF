@@ -5,8 +5,8 @@ namespace TimeVersion
     public enum EPaises
     {
         [Description("Brasil")] BR,
-        [Description("Estados Unidos")] USA,
-        [Description("Canadá")] CAN,
+        [Description("Estados Unidos")] US,
+        [Description("Canadá")] CA,
         [Description("Reino Unido")] UK,
         [Description("França")] FR,
         [Description("Alemanha")] DE,
@@ -59,7 +59,7 @@ namespace TimeVersion
         [Description("El Salvador")] SV,
         [Description("Haiti")] HT,
         [Description("Jamaica")] JM,
-        [Description("Bahamas")] BS,
+        [Description("Bahamas")] BS, 
         [Description("Barbados")] BB,
         [Description("Trinidad e Tobago")] TT,
     }

@@ -6,32 +6,29 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
+                 Icon="/faviconSol.png"
         ShowDialogsOverTitleBar="True" TitleCharacterCasing="Normal"
-        WindowTitleBrush="DarkSlateGray"
-        BorderBrush="DarkSlateGray"
+        WindowTitleBrush="DarkSlateGray" BorderBrush="DarkSlateGray"
         GlowBrush="DarkSlateGray"
-        NonActiveGlowBrush="Gray"
-        BorderThickness="2 0 2 0"
-        NonActiveBorderBrush="Gray"
+        NonActiveGlowBrush="Gray" NonActiveBorderBrush="Gray"
         NonActiveWindowTitleBrush="Gray"
+        BorderThickness="2 0 2 0"
         TitleAlignment="Center" TitleBarHeight="25" 
         ResizeMode="NoResize" Title="See the Weather API"
-        Height="350"
-                 Width="328"
-                 SaveWindowPosition="True"
-        AllowDrop="True"
-                 Topmost="True">
+        Height="350" Width="330" SaveWindowPosition="True"
+        AllowDrop="True" Topmost="True">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30px"/>
         </Grid.RowDefinitions>
 
-        <StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    MaxHeight="720"
-                    Width="340"
-                    Margin="0,0,0,0"  >
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            MaxHeight="720"
+            Width="340"
+            Margin="0,0,0,0"  >
 
             <TextBlock x:Name="labelTitulo"
                 Text="{Binding TituloResultadoPesquisa}"
@@ -43,12 +40,12 @@
                 Margin="0,20,0,10"/>
 
             <TextBox x:Name="txtCidade"
-                         mah:TextBoxHelper.UseFloatingWatermark="True"
-                         mah:TextBoxHelper.AutoWatermark="True"
-                         mah:TextBoxHelper.Watermark="Digite um local"
+                mah:TextBoxHelper.UseFloatingWatermark="True"
+                mah:TextBoxHelper.AutoWatermark="True"
+                mah:TextBoxHelper.Watermark="Digite um local"
                 AcceptsReturn="False" Width="220"
-                         HorizontalAlignment="Center" BorderThickness="2 0 0 1" Text="{Binding MUDAR_AQUI}"
-                         SelectionBrush="SlateBlue" FontSize="18" BorderBrush="SlateBlue"/>
+                HorizontalAlignment="Center" BorderThickness="2 0 0 1" Text="{Binding MUDAR_AQUI}"
+                SelectionBrush="SlateBlue" FontSize="18" BorderBrush="SlateBlue"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 16 0 0" >
 
@@ -74,7 +71,7 @@
                     Click="Limpar_Click"
                     Margin="20 0 0 0"
                     Content="Limpar"
-                        BorderThickness="1.5"
+                    BorderThickness="1.5"
                     Width="100" Height="40"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     VerticalAlignment="Center" HorizontalAlignment="Center"

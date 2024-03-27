@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,6 +17,7 @@ namespace TimeVersion
 
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly HttpClient _httpClient;
+
         private const string ApiKey = "f24e3b3b88dc280e84e540c4500113d5";
         private string _apiStatus = "";
         public string ApiStatus
@@ -89,7 +91,9 @@ namespace TimeVersion
 
         public async void BuscarPrevisaoClick(object sender, RoutedEventArgs evento)
         {
+
             string cidade = txtCidade.Text.Trim();
+            txtCidade.Text = "";
             try
             {
                 string previsao = await ObterPrevisaoDoTempo(cidade);
@@ -116,7 +120,7 @@ namespace TimeVersion
 
             string json = await response.Content.ReadAsStringAsync();
             Root cidadeEscolhida = JsonSerializer.Deserialize<Root>(json);
-            
+
             string paisDescricao = GetEnumDescription(cidadeEscolhida.Sys.Pais);
             double velocidadeVento = cidadeEscolhida.Vento.Velocidade;
             int umidade = cidadeEscolhida.Main.Umidade;
@@ -126,11 +130,11 @@ namespace TimeVersion
         }
         public static string GetEnumDescription(Enum value)
         {
-            var fieldInfo = value.GetType().GetField(value.ToString());
+            FieldInfo siglaJson = value.GetType().GetField(value.ToString());
+            DescriptionAttribute[] descricaoJson
+                = (DescriptionAttribute[])siglaJson.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
-            var attributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-            return attributes.Length > 0 ? attributes[0].Description : value.ToString();
+            return descricaoJson.Length > 0 ? descricaoJson[0].Description : value.ToString();
         }
         public async Task<string> ObterDescricaoDoCeu(string cidade)
         {
@@ -181,14 +185,23 @@ namespace TimeVersion
             {
                 Mensagem janela = new Mensagem();
                 Application.Current.MainWindow.ShowChildWindowAsync(janela, ChildWindowManager.OverlayFillBehavior.FullWindow);
-               
+
                 return;
             }
 
-
             string cortaCidade = ResultadoPesquisa.Replace("-", "|").Split('|')[0].Trim();
-            Process.Start($"https://pt.wikipedia.org/wiki/{cortaCidade}");
-            Process.Start($"https://www.google.com.br/maps/place/{cortaCidade}");
+            if (!string.IsNullOrEmpty(cortaCidade))
+            {
+                try
+                {
+                    Process.Start($"https://pt.wikipedia.org/wiki/{cortaCidade}");
+                    Process.Start($"https://www.google.com.br/maps/place/{cortaCidade}");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show($"Erro ao abrir navegador: ", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

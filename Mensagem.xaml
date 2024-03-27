@@ -5,18 +5,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        mc:Ignorable="d" Title="ALERTA" Closing="teste_fechar"
+        mc:Ignorable="d" Title="ALERTA" TitleVerticalAlignment="Center" TitleHorizontalAlignment="Center"
+    
         xmlns:child="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow">
 
     <StackPanel Orientation="Vertical">
-        <TextBlock Margin="30 0 30 20" Text="Necessário escrever um local" FontSize="20"/>
+        <TextBlock Margin="30 10 30 10" Text="Escreva um local válido" FontSize="20"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Background="CadetBlue"
-            mah:ControlsHelper.CornerRadius="7"
+            <Button Background="IndianRed"
+                    Foreground="White"
+            mah:ControlsHelper.CornerRadius="3"
             mah:ControlsHelper.ContentCharacterCasing="Normal"       
             mah:ControlsHelper.FocusBorderThickness="0"
-            Margin="0 0 0 05" Content="Confirmar" Width="100" Click="confirmar_click"/>
+            Margin="0 0 0 8" Content="Confirmar" Width="140" Click="confirmar_click"/>
 
         </StackPanel>
     </StackPanel>
