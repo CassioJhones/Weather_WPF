@@ -6,23 +6,14 @@
     <AssemblyName>SeeTheWeatherAPI</AssemblyName>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\cassi\Downloads\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <SupportUrl>https://github.com/CassioJhones/Weather_WPF</SupportUrl>
     <TargetCulture>pt-BR</TargetCulture>
     <ProductName>SeeTheWeatherAPI</ProductName>
     <PublisherName>Cassio Jhones</PublisherName>
     <SuiteName>SeeTheWeatherAPI</SuiteName>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>SeeTheWeatherAPI.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
     <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
@@ -35,19 +26,18 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <WarningLevel>5</WarningLevel>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>..\..\..\Downloads\apps\</OutputPath>
-    <WarningLevel>0</WarningLevel>
+    <WarningLevel>9999</WarningLevel>
     <DocumentationFile>..\..\..\Downloads\apps\SeeTheWeatherAPI.xml</DocumentationFile>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>faviconSol.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
