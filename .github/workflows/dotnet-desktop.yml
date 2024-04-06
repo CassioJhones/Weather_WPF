@@ -21,7 +21,12 @@ jobs:
 
             - run: dotnet restore ${{ env.PROJECT_PATH }}
             - run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
-            - run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=True
-
+            - run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=True --no-build
+            - uses: action/create-release@v1
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                tag_name: ${{ github.ref }}
+                release_name: ${{ github.ref }}
 
  
