@@ -29,8 +29,8 @@ jobs:
       - name: Publicacao do Software
         run: dotnet publish ${{ env.CAMINHO }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=True --no-build
   
-      - uses: action/create-release@v1
-        id: create_release
+      - uses: Weather_WPF/releases@v1
+        id: Weather_WPF/releases
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
