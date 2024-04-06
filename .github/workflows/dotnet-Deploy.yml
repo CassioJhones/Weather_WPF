@@ -16,33 +16,34 @@ jobs:
             configuration: [Release]
       runs-on: windows-latest
       steps:
-      # - name: Checagem
-      #   uses: actions/checkout@v4
-      #   with:
-      #    fetch-depth: 1
+      - name: Checagem
+        uses: actions/checkout@v4
+        with:
+         fetch-depth: 1
 
-      # - name: Instalacao .NET
-      #   uses: actions/setup-dotnet@v4
-      #   with:
-      #     dotnet-version: 5.x
+      - name: Instalacao .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 5.x
 
-      # - name: Setup MSBuild.exe
-      #   uses: microsoft/setup-msbuild@v2
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v2
 
-      # - name: Restauracao da Aplicacao e Dependencias
-      #   run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
-      #   env:
-      #     Configuration: ${{ matrix.configuration }}
+      - name: Restauracao da Aplicacao e Dependencias
+        run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+        env:
+          Configuration: ${{ matrix.configuration }}
   
-      # - name: Compilacao dos Arquivos
-      #   run: dotnet build ${{ env.CAMINHO }} -c Release --no-restore
+      - name: Compilacao dos Arquivos
+        run: dotnet build ${{ env.CAMINHO }} -c Release --no-restore
       
-      # - name: Publicacao do Software
-      #   run: dotnet publish ${{ env.CAMINHO }} -c Release --self-contained -r win-x64 --no-build
+      - name: Publicacao do Software
+        run: dotnet publish ${{ env.CAMINHO }} -c Release --self-contained -r win-x64 --no-build
   
-      
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Criando Publicação
+      - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -52,7 +53,7 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             Changes in this Release
-            - Release Automatico com GitHub Actions
-            - Release Automatico com GitHub Actions
+            - First Change
+            - Second Change
           draft: false
           prerelease: false
