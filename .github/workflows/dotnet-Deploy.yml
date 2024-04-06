@@ -1,0 +1,35 @@
+
+name: Teste Deploy
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  deploy:
+      runs-on: windows-latest
+      steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 8.0.x
+
+      - run: dotnet restore ${{ env.PROJECT_PATH }}
+      - run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
+      - run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=True --no-build
+  
+      - uses: action/create-release@v1
+        id: create_release
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+
+      - uses: Weather_WPF/release-asset-actions@v2
+        with:
+         github-token: ${{ secrets.GITHUB_TOKEN }}
+         pattern: Downloads\apps\app.publish\*.exe   
+         release-url: ${{ steps.create_release.outputs.upload_url }}
