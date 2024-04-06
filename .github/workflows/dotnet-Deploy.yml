@@ -4,21 +4,30 @@ name: Teste Deploy
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+
+env:
+  CAMINHO: TimeVersion\TimeVersion.csproj
 
 jobs:
   deploy:
       runs-on: windows-latest
       steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v1
+      - name: Checagem
+        uses: actions/checkout@v2
+
+      - name: Instalacao .Net
+        uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 8.0.x
 
-      - run: dotnet restore ${{ env.PROJECT_PATH }}
-      - run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
-      - run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=True --no-build
+      - name: Restauracao de Dependencias
+        run: dotnet restore ${{ env.CAMINHO }} 
+  
+      - name: Compilacao dos Arquivos
+        run: dotnet build ${{ env.CAMINHO }} -c Release --no-restore
+      
+      - name: Publicacao do Software
+        run: dotnet publish ${{ env.CAMINHO }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=True --no-build
   
       - uses: action/create-release@v1
         id: create_release
