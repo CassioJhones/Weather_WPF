@@ -56,15 +56,21 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="ViewModel\**" />
+    <Compile Remove="View\**" />
+    <EmbeddedResource Remove="ViewModel\**" />
+    <EmbeddedResource Remove="View\**" />
+    <None Remove="ViewModel\**" />
+    <None Remove="View\**" />
+    <Page Remove="ViewModel\**" />
+    <Page Remove="View\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

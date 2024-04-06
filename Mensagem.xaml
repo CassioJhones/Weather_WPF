@@ -1,24 +1,33 @@
 ﻿<child:ChildWindow
     x:Class="TimeVersion.Mensagem"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        mc:Ignorable="d" Title="ALERTA" TitleVerticalAlignment="Center" TitleHorizontalAlignment="Center"
-    
-        xmlns:child="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:child="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ALERTA"
+    TitleHorizontalAlignment="Center"
+    TitleVerticalAlignment="Center"
+    mc:Ignorable="d">
 
     <StackPanel Orientation="Vertical">
-        <TextBlock Margin="30 10 30 10" Text="Escreva um local válido" FontSize="20"/>
+        <TextBlock
+            Margin="30,10,30,10"
+            FontSize="20"
+            Text="Escreva um local válido" />
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Background="IndianRed"
-                    Foreground="White"
-            mah:ControlsHelper.CornerRadius="3"
-            mah:ControlsHelper.ContentCharacterCasing="Normal"       
-            mah:ControlsHelper.FocusBorderThickness="0"
-            Margin="0 0 0 8" Content="Confirmar" Width="140" Click="confirmar_click"/>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button
+                Width="140"
+                Margin="0,0,0,8"
+                mah:ControlsHelper.ContentCharacterCasing="Normal"
+                mah:ControlsHelper.CornerRadius="3"
+                mah:ControlsHelper.FocusBorderThickness="0"
+                Background="IndianRed"
+                Click="confirmar_click"
+                Content="Confirmar"
+                Foreground="White" />
 
         </StackPanel>
     </StackPanel>
