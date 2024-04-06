@@ -51,10 +51,15 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          
-      - name: teste
-        uses: actions/release-asset-action@v2
+          draft: false
+          prerelease: false
+      - name: Upload Arquivos 
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: D:\Downloads\apps\net48\win-x64\publish\*.exe
-          release-url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: D:\Downloads\apps\net48\win-x64\publish\
+          asset_name: SeeTheWeatherAPI.exe
+          asset_content_type: application/octet-stream
