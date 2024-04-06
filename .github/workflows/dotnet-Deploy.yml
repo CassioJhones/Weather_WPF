@@ -37,8 +37,8 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
 
-      - uses: Weather_WPF/release-asset-actions@v2
-        with:
-         github-token: ${{ secrets.GITHUB_TOKEN }}
-         pattern: Downloads\apps\app.publish\*.exe   
-         release-url: ${{ steps.create_release.outputs.upload_url }}
+      # - uses: Weather_WPF/release-asset-actions@v2
+      #   with:
+      #    github-token: ${{ secrets.GITHUB_TOKEN }}
+      #    pattern: Downloads\apps\app.publish\*.exe   
+      #    release-url: ${{ steps.create_release.outputs.upload_url }}
