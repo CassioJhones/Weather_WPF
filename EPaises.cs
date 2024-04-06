@@ -62,5 +62,7 @@ namespace TimeVersion
         [Description("Bahamas")] BS, 
         [Description("Barbados")] BB,
         [Description("Trinidad e Tobago")] TT,
+        [Description("Angola")] AO,
+        [Description("Israel")] IL,
     }
 }
