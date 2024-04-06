@@ -4,10 +4,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly="
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d" Title="ALERTA" TitleVerticalAlignment="Center" TitleHorizontalAlignment="Center"
     
-        xmlns:child="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=">
+        xmlns:child="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow">
 
     <StackPanel Orientation="Vertical">
         <TextBlock Margin="30 10 30 10" Text="Escreva um local válido" FontSize="20"/>
