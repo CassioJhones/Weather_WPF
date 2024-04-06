@@ -19,32 +19,26 @@ jobs:
       - name: Checagem
         uses: actions/checkout@v4
         with:
-         fetch-depth: 0
+         fetch-depth: 1
 
-      - name: Instalacao .NET Core
+      - name: Instalacao .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 5.x
 
-
-          
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v2
 
-    
-      - name: Restauracao da Aplicacao
+      - name: Restauracao da Aplicacao e Dependencias
         run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
         env:
-         Configuration: ${{ matrix.configuration }}
-
-      - name: Restauracao de Dependencias
-        run: dotnet restore ${{ env.CAMINHO }} 
+          Configuration: ${{ matrix.configuration }}
   
       - name: Compilacao dos Arquivos
         run: dotnet build ${{ env.CAMINHO }} -c Release --no-restore
       
       - name: Publicacao do Software
-        run: dotnet publish ${{ env.CAMINHO }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=True --no-build
+        run: dotnet publish ${{ env.CAMINHO }} -c Release --self-contained -r win-x64 --no-build
   
       # - uses: Weather_WPF/releases@v1
       #   id: Weather_WPF/releases
