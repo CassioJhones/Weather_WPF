@@ -1,5 +1,5 @@
 
-name: Teste Deploy
+name: Teste CI/CD
 
 on:
   push:
@@ -40,26 +40,27 @@ jobs:
       - name: Publicacao do Software
         run: dotnet publish ${{ env.CAMINHO }} -c Release --self-contained -r win-x64 --no-build
   
-      - name: Checkout code
-        uses: actions/checkout@v2
+      #NAO ESTA FUNCIONANDO
+      # - name: Checkout code
+      #   uses: actions/checkout@v2
 
-      - name: Create Release
-        uses: actions/create-release@v1
-        id: create_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-      - name: Upload Arquivos 
-        id: upload-release-asset 
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: D:\Downloads\apps\net48\win-x64\publish\
-          asset_name: SeeTheWeatherAPI.exe
-          asset_content_type: application/octet-stream
+      # - name: Create Release
+      #   uses: actions/create-release@v1
+      #   id: create_release
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     release_name: Release ${{ github.ref }}
+      #     draft: false
+      #     prerelease: false
+      # - name: Upload Arquivos 
+      #   id: upload-release-asset 
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: D:\Downloads\apps\net48\win-x64\publish\
+      #     asset_name: SeeTheWeatherAPI.exe
+      #     asset_content_type: application/octet-stream
