@@ -7,18 +7,35 @@ on:
 
 env:
   CAMINHO: D:\a\Weather_WPF\Weather_WPF
+  Solution_Name: TimeVersion.sln
 
 jobs:
   deploy:
+      strategy:
+          matrix:
+            configuration: [Release]
       runs-on: windows-latest
       steps:
       - name: Checagem
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+         fetch-depth: 0
 
-      - name: Instalacao .Net
-        uses: actions/setup-dotnet@v1
+      - name: Instalacao .NET Core
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
+
+
+          
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v2
+
+    
+      - name: Restauracao da Aplicacao
+        run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+        env:
+         Configuration: ${{ matrix.configuration }}
 
       - name: Restauracao de Dependencias
         run: dotnet restore ${{ env.CAMINHO }} 
