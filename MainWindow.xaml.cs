@@ -1,6 +1,7 @@
 ﻿using MahApps.Metro.SimpleChildWindow;
 using System;
 using System.ComponentModel;
+using System.Data.Linq;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Reflection;
