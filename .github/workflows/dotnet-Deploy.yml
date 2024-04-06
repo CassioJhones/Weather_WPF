@@ -16,40 +16,55 @@ jobs:
             configuration: [Release]
       runs-on: windows-latest
       steps:
-      - name: Checagem
-        uses: actions/checkout@v4
-        with:
-         fetch-depth: 1
+      # - name: Checagem
+      #   uses: actions/checkout@v4
+      #   with:
+      #    fetch-depth: 1
 
-      - name: Instalacao .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 5.x
+      # - name: Instalacao .NET
+      #   uses: actions/setup-dotnet@v4
+      #   with:
+      #     dotnet-version: 5.x
 
-      - name: Setup MSBuild.exe
-        uses: microsoft/setup-msbuild@v2
+      # - name: Setup MSBuild.exe
+      #   uses: microsoft/setup-msbuild@v2
 
-      - name: Restauracao da Aplicacao e Dependencias
-        run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
-        env:
-          Configuration: ${{ matrix.configuration }}
-  
-      - name: Compilacao dos Arquivos
-        run: dotnet build ${{ env.CAMINHO }} -c Release --no-restore
-      
-      - name: Publicacao do Software
-        run: dotnet publish ${{ env.CAMINHO }} -c Release --self-contained -r win-x64 --no-build
-  
-      # - uses: Weather_WPF/releases@v1
-      #   id: Weather_WPF/releases
+      # - name: Restauracao da Aplicacao e Dependencias
+      #   run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
       #   env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: ${{ github.ref }}
-      #     release_name: ${{ github.ref }}
+      #     Configuration: ${{ matrix.configuration }}
+  
+      # - name: Compilacao dos Arquivos
+      #   run: dotnet build ${{ env.CAMINHO }} -c Release --no-restore
+      
+      # - name: Publicacao do Software
+      #   run: dotnet publish ${{ env.CAMINHO }} -c Release --self-contained -r win-x64 --no-build
+  
+      - uses: CassioJhones/Weather_WPF/releases
+        id: CassioJhones/Weather_WPF/releases
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
 
-      # - uses: Weather_WPF/release-asset-actions@v2
-      #   with:
-      #    github-token: ${{ secrets.GITHUB_TOKEN }}
-      #    pattern: Downloads\apps\app.publish\*.exe   
-      #    release-url: ${{ steps.create_release.outputs.upload_url }}
+      - uses: CassioJhones/Weather_WPF/releases
+        with:
+         github-token: ${{ secrets.GITHUB_TOKEN }}
+         pattern: Downloads\apps\app.publish\*.exe   
+         release-url: ${{ steps.create_release.outputs.upload_url }}
+
+      - name: Criando Publicação
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - Release Automatico com GitHub Actions
+            - Release Automatico com GitHub Actions
+          draft: false
+          prerelease: false
