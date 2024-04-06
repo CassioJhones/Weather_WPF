@@ -6,7 +6,7 @@ on:
     branches: [ "master" ]
 
 env:
-  CAMINHO: TimeVersion\TimeVersion.csproj
+  CAMINHO: D:\a\Weather_WPF\Weather_WPF
 
 jobs:
   deploy:
